@@ -9,6 +9,7 @@ import com.devadath.factaday.twitter.services.TweetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +21,7 @@ public class TweetController {
     private TweetService tweetService;
 
     @RequestMapping(path = "/tweet-a-fact", method = RequestMethod.POST)
+    @Scheduled(cron = "0 15 10 * * *", zone = "Asia/Kolkata")
     public ResponseEntity publishFact() {
         System.out.println(">> publishFact()");
         try {

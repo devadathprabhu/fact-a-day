@@ -8,6 +8,7 @@ package com.devadath.factaday.fact;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -15,7 +16,6 @@ import org.springframework.web.client.RestTemplate;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.LinkedHashMap;
-import java.util.Set;
 
 @Component
 public class FactFetcher {
@@ -25,6 +25,12 @@ public class FactFetcher {
 
     @Autowired
     private ObjectMapper objectMapper;
+
+    @Value("${rapid.api.key}")
+    private String rapidApiKey;
+
+    @Value("${rapid.api.host}")
+    private String rapidApiHost;
 
     private final String uriTemplate = "https://numbersapi.p.rapidapi.com/${month}/${day}/date?json=true&fragment=true";
 
@@ -51,8 +57,8 @@ public class FactFetcher {
 
     private HttpEntity getHeaders() {
         HttpHeaders headers = new HttpHeaders();
-        headers.set("x-rapidapi-key", "fc7711e53amsha34e4572c2d1e16p1e33fajsn24b1c9a44664");
-        headers.set("x-rapidapi-host", "numbersapi.p.rapidapi.com");
+        headers.set("x-rapidapi-key", rapidApiKey);
+        headers.set("x-rapidapi-host", rapidApiHost);
 
         HttpEntity request = new HttpEntity(headers);
         return request;
