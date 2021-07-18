@@ -21,7 +21,7 @@ public class TweetController {
     private TweetService tweetService;
 
     @RequestMapping(path = "/tweet-a-fact", method = RequestMethod.POST)
-    @Scheduled(cron = "0 15 10 * * *", zone = "Asia/Kolkata")
+    @Scheduled(cron = "0 45 10 * * ?", zone = "Asia/Kolkata")
     public ResponseEntity publishFact() {
         System.out.println(">> publishFact()");
         try {
